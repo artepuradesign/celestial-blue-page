@@ -9,7 +9,7 @@ const PublicPlanos = () => {
   const isMatrix = currentVisualTheme === 'matrix';
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="h-screen flex flex-col relative overflow-hidden">
       {/* Animated Background - hidden in matrix theme via CSS */}
       {!isMatrix && (
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20 planos-publicos-bg">
@@ -24,9 +24,13 @@ const PublicPlanos = () => {
         </div>
       )}
       
-      {/* Content */}
-      <div className="relative z-10">
+      {/* Fixed Header */}
+      <div className="relative z-20 flex-shrink-0">
         <MenuSuperior />
+      </div>
+      
+      {/* Scrollable Content */}
+      <div className="relative z-10 flex-1 overflow-y-auto">
         <PublicPlansSection />
         <NewFooter />
       </div>
