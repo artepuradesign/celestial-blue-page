@@ -158,10 +158,10 @@ const LiquidGlassAdmin = () => {
             <div
               className="relative rounded-xl overflow-hidden p-8 min-h-[400px] flex flex-col items-center justify-center gap-6"
               style={isPreviewMatrix
-                ? { background: previewDark ? '#000' : '#f0fff0' }
+                ? { background: previewDark ? '#000' : '#1a3a1a' }
                 : { background: previewDark
                     ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
-                    : 'linear-gradient(135deg, #e8e8f0 0%, #f5f5fa 50%, #dde4f0 100%)'
+                    : 'linear-gradient(135deg, #3a3a5e 0%, #4a4a6e 50%, #2f4a70 100%)'
                 }
               }
             >
@@ -171,9 +171,9 @@ const LiquidGlassAdmin = () => {
                 </div>
               ) : (
                 <>
-                  <div className="absolute top-8 left-8 w-32 h-32 rounded-full blur-xl" style={{ background: previewDark ? 'rgba(124,58,237,0.2)' : 'rgba(124,58,237,0.15)' }} />
-                  <div className="absolute bottom-12 right-12 w-40 h-40 rounded-full blur-2xl" style={{ background: previewDark ? 'rgba(59,130,246,0.15)' : 'rgba(59,130,246,0.1)' }} />
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-xl" style={{ background: previewDark ? 'rgba(168,85,247,0.15)' : 'rgba(168,85,247,0.1)' }} />
+                  <div className="absolute top-8 left-8 w-32 h-32 rounded-full blur-xl" style={{ background: 'rgba(124,58,237,0.2)' }} />
+                  <div className="absolute bottom-12 right-12 w-40 h-40 rounded-full blur-2xl" style={{ background: 'rgba(59,130,246,0.15)' }} />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-xl" style={{ background: 'rgba(168,85,247,0.15)' }} />
                 </>
               )}
 
@@ -192,10 +192,10 @@ const LiquidGlassAdmin = () => {
                   border: `1px solid rgba(255,255,255,${config.backgroundAlpha / 200})`,
                 }}
               >
-                <p className="text-base font-semibold" style={{ color: previewDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)' }}>
+                <p className="text-base font-semibold" style={{ color: 'rgba(255,255,255,0.9)' }}>
                   Liquid Glass Preview
                 </p>
-                <p className="text-sm mt-2" style={{ color: previewDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.5)' }}>
+                <p className="text-sm mt-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   Este card reflete todas as configurações em tempo real.
                 </p>
               </div>
