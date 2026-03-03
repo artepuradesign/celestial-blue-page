@@ -166,7 +166,7 @@ const DashboardLayout = ({
         <AdminNotifications />
       </div>
       
-      <div className="flex flex-col min-h-screen w-full overflow-hidden relative z-10">
+      <div className="flex flex-col min-h-screen w-full overflow-x-hidden relative z-10">
         {/* Menu Superior - em todas as telas */}
         <MenuSuperior />
         

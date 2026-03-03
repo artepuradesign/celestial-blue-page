@@ -15,6 +15,7 @@ import { useUserBalance } from '@/hooks/useUserBalance';
 import { SimpleCounter } from '@/components/ui/simple-counter';
 import UserWalletDropdown from '@/components/ui/user-wallet-dropdown';
 import { useLiquidGlass } from '@/contexts/LiquidGlassContext';
+import LiquidGlassButton from '@/components/ui/LiquidGlassButton';
 
 import SidebarMenu from './dashboard/layout/sidebar/SidebarMenu';
 import { createSidebarItems } from './dashboard/layout/sidebarData';
@@ -162,16 +163,39 @@ const MenuSuperior = () => {
               </>
             ) : (
               <>
-                <Link to="/registration">
-                  <Button size="sm" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold">
-                    Testar grátis
-                  </Button>
-                </Link>
-                <Link to="/login">
-                  <Button size="sm" variant="default" className="font-semibold">
-                    Entrar
-                  </Button>
-                </Link>
+                {liquidGlassConfig.enabled ? (
+                  <>
+                    <LiquidGlassButton
+                      variant="primary"
+                      className="text-sm px-4 py-2"
+                      onClick={() => navigate('/registration')}
+                      ariaLabel="Testar grátis"
+                    >
+                      Testar grátis
+                    </LiquidGlassButton>
+                    <LiquidGlassButton
+                      variant="outline"
+                      className="text-sm px-4 py-2"
+                      onClick={() => navigate('/login')}
+                      ariaLabel="Entrar"
+                    >
+                      Entrar
+                    </LiquidGlassButton>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/registration">
+                      <Button size="sm" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold">
+                        Testar grátis
+                      </Button>
+                    </Link>
+                    <Link to="/login">
+                      <Button size="sm" variant="default" className="font-semibold">
+                        Entrar
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </>
             )}
           </div>
