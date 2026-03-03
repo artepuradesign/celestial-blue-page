@@ -6,7 +6,7 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { RotateCcw, Droplets, Eye, Save, Sun, Moon, Palette } from 'lucide-react';
+import { RotateCcw, Droplets, Eye, Save, Palette } from 'lucide-react';
 import DashboardTitleCard from '@/components/dashboard/DashboardTitleCard';
 import { useTheme } from '@/components/ThemeProvider';
 import ContainedMatrixRain from '@/components/effects/ContainedMatrixRain';
@@ -43,7 +43,7 @@ const LiquidGlassAdmin = () => {
   const { config, updateParam, resetToDefaults } = useLiquidGlass();
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
-  const [previewDark, setPreviewDark] = useState(true);
+  
   const [previewTheme, setPreviewTheme] = useState<PreviewTheme>('default');
   const isPreviewMatrix = previewTheme === 'matrix';
 
@@ -141,16 +141,7 @@ const LiquidGlassAdmin = () => {
                     <SelectItem value="matrix">Matrix</SelectItem>
                   </SelectContent>
                 </Select>
-                {/* Light/Dark toggle */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPreviewDark(!previewDark)}
-                  className="gap-2"
-                >
-                  {previewDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-                  {previewDark ? 'Claro' : 'Escuro'}
-                </Button>
+                
               </div>
             </div>
           </CardHeader>
@@ -158,11 +149,8 @@ const LiquidGlassAdmin = () => {
             <div
               className="relative rounded-xl overflow-hidden p-8 min-h-[400px] flex flex-col items-center justify-center gap-6"
               style={isPreviewMatrix
-                ? { background: previewDark ? '#000' : '#1a3a1a' }
-                : { background: previewDark
-                    ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
-                    : 'linear-gradient(135deg, #3a3a5e 0%, #4a4a6e 50%, #2f4a70 100%)'
-                }
+                ? { background: '#000' }
+                : { background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }
               }
             >
               {isPreviewMatrix ? (
