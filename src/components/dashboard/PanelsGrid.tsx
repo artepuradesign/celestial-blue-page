@@ -33,21 +33,37 @@ interface PanelsGridProps {
 
 const PanelsGrid: React.FC<PanelsGridProps> = ({ activePanels }) => {
   const { config: liquidGlassConfig } = useLiquidGlass();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   
   // Build inline glass style matching the LiquidGlassAdmin preview model
   const glassStyle = useMemo<React.CSSProperties>(() => {
     if (!liquidGlassConfig.enabled) return {};
     const filter = `blur(${liquidGlassConfig.strength + liquidGlassConfig.extraBlur}px) saturate(${liquidGlassConfig.tintSaturation}%) contrast(${liquidGlassConfig.contrast}%) brightness(${liquidGlassConfig.brightness}%) invert(${liquidGlassConfig.invert}%) hue-rotate(${liquidGlassConfig.tintHue}deg)`;
+    
+    // Light mode: use dark-tinted glass; Dark mode: use white-tinted glass
+    const baseColor = isDark ? '255,255,255' : '0,0,0';
+    const bgAlpha = liquidGlassConfig.backgroundAlpha / 100;
+    const specHighAlpha = liquidGlassConfig.edgeSpecularity / 200;
+    const specLowAlpha = liquidGlassConfig.edgeSpecularity / 300;
+    const borderAlpha = liquidGlassConfig.backgroundAlpha / 200;
+    
     return {
       borderRadius: `${liquidGlassConfig.cornerRadius}px`,
       backdropFilter: filter,
       WebkitBackdropFilter: filter,
-      background: `rgba(255,255,255,${liquidGlassConfig.backgroundAlpha / 100})`,
-      boxShadow: `0 0 ${liquidGlassConfig.softness}px rgba(255,255,255,${liquidGlassConfig.edgeSpecularity / 200}), inset 0 1px 0 rgba(255,255,255,${liquidGlassConfig.edgeSpecularity / 300})`,
+      background: isDark
+        ? `rgba(255,255,255,${bgAlpha})`
+        : `rgba(255,255,255,${Math.min(bgAlpha * 6, 0.65)})`,
+      boxShadow: isDark
+        ? `0 0 ${liquidGlassConfig.softness}px rgba(255,255,255,${specHighAlpha}), inset 0 1px 0 rgba(255,255,255,${specLowAlpha})`
+        : `0 0 ${liquidGlassConfig.softness}px rgba(0,0,0,${specHighAlpha * 0.3}), inset 0 1px 0 rgba(255,255,255,${specLowAlpha * 2})`,
       opacity: liquidGlassConfig.opacity / 100,
-      border: `1px solid rgba(255,255,255,${liquidGlassConfig.backgroundAlpha / 200})`,
+      border: isDark
+        ? `1px solid rgba(255,255,255,${borderAlpha})`
+        : `1px solid rgba(0,0,0,${borderAlpha * 0.5})`,
     };
-  }, [liquidGlassConfig]);
+  }, [liquidGlassConfig, isDark]);
   
   const glassClass = liquidGlassConfig.enabled ? '' : 'bg-card border border-border';
   const { modules } = useApiModules();
