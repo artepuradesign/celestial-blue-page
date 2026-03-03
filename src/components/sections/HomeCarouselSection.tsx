@@ -238,7 +238,10 @@ const HomeCarouselSection: React.FC = () => {
                                   <Button
                                     size="lg"
                                     variant="outline"
-                                    className="w-full sm:w-auto font-semibold"
+                                    className={cn(
+                                      "w-full sm:w-auto font-semibold",
+                                      isMatrix && "border-green-400/60 text-green-400 hover:bg-green-400/10 hover:text-green-300"
+                                    )}
                                     onClick={() => navigate("/planos-publicos")}
                                   >
                                     Ver planos
