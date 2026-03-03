@@ -158,10 +158,10 @@ const LiquidGlassAdmin = () => {
             <div
               className="relative rounded-xl overflow-hidden p-8 min-h-[400px] flex flex-col items-center justify-center gap-6"
               style={isPreviewMatrix
-                ? { background: previewDark ? '#000' : '#f0fff0' }
+                ? { background: previewDark ? '#000' : '#1a3a1a' }
                 : { background: previewDark
                     ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
-                    : 'linear-gradient(135deg, #e8e8f0 0%, #f5f5fa 50%, #dde4f0 100%)'
+                    : 'linear-gradient(135deg, #3a3a5e 0%, #4a4a6e 50%, #2f4a70 100%)'
                 }
               }
             >
