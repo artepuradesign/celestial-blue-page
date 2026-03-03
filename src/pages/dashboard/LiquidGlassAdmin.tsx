@@ -5,9 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { RotateCcw, Droplets, Eye, Save, Sun, Moon } from 'lucide-react';
+import { RotateCcw, Droplets, Eye, Save, Sun, Moon, Palette } from 'lucide-react';
 import DashboardTitleCard from '@/components/dashboard/DashboardTitleCard';
-import { useSiteTheme } from '@/contexts/SiteThemeContext';
 import { useTheme } from '@/components/ThemeProvider';
 import ContainedMatrixRain from '@/components/effects/ContainedMatrixRain';
 import LiquidGlassButton from '@/components/ui/LiquidGlassButton';
@@ -37,13 +36,15 @@ const sliderParams: SliderParam[] = [
   { key: 'backgroundAlpha', label: 'Transparência do Botão', min: 0, max: 100, step: 1, unit: '%' },
 ];
 
+type PreviewTheme = 'default' | 'matrix';
+
 const LiquidGlassAdmin = () => {
   const { config, updateParam, resetToDefaults } = useLiquidGlass();
-  const { currentVisualTheme } = useSiteTheme();
   const { theme } = useTheme();
-  const isMatrix = currentVisualTheme === 'matrix';
   const isDarkMode = theme === 'dark';
   const [previewDark, setPreviewDark] = useState(true);
+  const [previewTheme, setPreviewTheme] = useState<PreviewTheme>('default');
+  const isPreviewMatrix = previewTheme === 'matrix';
 
   const glassFilter = `blur(${config.strength + config.extraBlur}px) saturate(${config.tintSaturation}%) contrast(${config.contrast}%) brightness(${config.brightness}%) invert(${config.invert}%) hue-rotate(${config.tintHue}deg)`;
 
