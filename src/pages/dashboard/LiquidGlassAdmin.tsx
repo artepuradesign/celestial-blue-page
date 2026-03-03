@@ -6,7 +6,7 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { RotateCcw, Droplets, Eye, Save, Sun, Moon, Palette } from 'lucide-react';
+import { RotateCcw, Droplets, Eye, Save, Palette } from 'lucide-react';
 import DashboardTitleCard from '@/components/dashboard/DashboardTitleCard';
 import { useTheme } from '@/components/ThemeProvider';
 import ContainedMatrixRain from '@/components/effects/ContainedMatrixRain';
