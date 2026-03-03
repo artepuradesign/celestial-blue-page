@@ -52,16 +52,10 @@ const PanelsGrid: React.FC<PanelsGridProps> = ({ activePanels }) => {
       borderRadius: `${liquidGlassConfig.cornerRadius}px`,
       backdropFilter: filter,
       WebkitBackdropFilter: filter,
-      background: isDark
-        ? `rgba(255,255,255,${bgAlpha})`
-        : `rgba(0,0,0,${bgAlpha})`,
-      boxShadow: isDark
-        ? `0 0 ${liquidGlassConfig.softness}px rgba(255,255,255,${specHighAlpha}), inset 0 1px 0 rgba(255,255,255,${specLowAlpha})`
-        : `0 0 ${liquidGlassConfig.softness}px rgba(0,0,0,${specHighAlpha}), inset 0 1px 0 rgba(0,0,0,${specLowAlpha})`,
+      background: `rgba(255,255,255,${bgAlpha})`,
+      boxShadow: `0 0 ${liquidGlassConfig.softness}px rgba(255,255,255,${specHighAlpha}), inset 0 1px 0 rgba(255,255,255,${specLowAlpha})`,
       opacity: liquidGlassConfig.opacity / 100,
-      border: isDark
-        ? `1px solid rgba(255,255,255,${borderAlpha})`
-        : `1px solid rgba(0,0,0,${borderAlpha})`,
+      border: `1px solid rgba(255,255,255,${borderAlpha})`,
     };
   }, [liquidGlassConfig, isDark]);
   
