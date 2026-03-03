@@ -19,6 +19,7 @@ import { useUserSubscription } from '@/hooks/useUserSubscription';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useModuleRecords } from '@/hooks/useModuleRecords';
 import { useLiquidGlass } from '@/contexts/LiquidGlassContext';
+import { useTheme } from '@/components/ThemeProvider';
 import { usePixPaymentFlow } from '@/hooks/usePixPaymentFlow';
 import { useUserDataApi } from '@/hooks/useUserDataApi';
 import PixQRCodeModal from '@/components/payment/PixQRCodeModal';
