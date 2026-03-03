@@ -5,9 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { RotateCcw, Droplets, Eye, Save, Sun, Moon } from 'lucide-react';
+import { RotateCcw, Droplets, Eye, Save, Sun, Moon, Palette } from 'lucide-react';
 import DashboardTitleCard from '@/components/dashboard/DashboardTitleCard';
-import { useSiteTheme } from '@/contexts/SiteThemeContext';
 import { useTheme } from '@/components/ThemeProvider';
 import ContainedMatrixRain from '@/components/effects/ContainedMatrixRain';
 import LiquidGlassButton from '@/components/ui/LiquidGlassButton';
@@ -37,13 +36,15 @@ const sliderParams: SliderParam[] = [
   { key: 'backgroundAlpha', label: 'Transparência do Botão', min: 0, max: 100, step: 1, unit: '%' },
 ];
 
+type PreviewTheme = 'default' | 'matrix';
+
 const LiquidGlassAdmin = () => {
   const { config, updateParam, resetToDefaults } = useLiquidGlass();
-  const { currentVisualTheme } = useSiteTheme();
   const { theme } = useTheme();
-  const isMatrix = currentVisualTheme === 'matrix';
   const isDarkMode = theme === 'dark';
   const [previewDark, setPreviewDark] = useState(true);
+  const [previewTheme, setPreviewTheme] = useState<PreviewTheme>('default');
+  const isPreviewMatrix = previewTheme === 'matrix';
 
   const glassFilter = `blur(${config.strength + config.extraBlur}px) saturate(${config.tintSaturation}%) contrast(${config.contrast}%) brightness(${config.brightness}%) invert(${config.invert}%) hue-rotate(${config.tintHue}deg)`;
 
@@ -127,21 +128,34 @@ const LiquidGlassAdmin = () => {
                 </CardTitle>
                 <CardDescription>Visualize o efeito em tempo real</CardDescription>
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setPreviewDark(!previewDark)}
-                className="gap-2"
-              >
-                {previewDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-                {previewDark ? 'Claro' : 'Escuro'}
-              </Button>
+              <div className="flex items-center gap-2">
+                {/* Theme switcher (Padrão / Matrix) */}
+                <Button
+                  variant={isPreviewMatrix ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setPreviewTheme(isPreviewMatrix ? 'default' : 'matrix')}
+                  className="gap-2"
+                >
+                  <Palette className="h-3.5 w-3.5" />
+                  {isPreviewMatrix ? 'Matrix' : 'Padrão'}
+                </Button>
+                {/* Light/Dark toggle */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setPreviewDark(!previewDark)}
+                  className="gap-2"
+                >
+                  {previewDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+                  {previewDark ? 'Claro' : 'Escuro'}
+                </Button>
+              </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
             <div
               className="relative rounded-xl overflow-hidden p-8 min-h-[400px] flex flex-col items-center justify-center gap-6"
-              style={isMatrix
+              style={isPreviewMatrix
                 ? { background: previewDark ? '#000' : '#f0fff0' }
                 : { background: previewDark
                     ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
@@ -149,7 +163,7 @@ const LiquidGlassAdmin = () => {
                 }
               }
             >
-              {isMatrix ? (
+              {isPreviewMatrix ? (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   <ContainedMatrixRain />
                 </div>
@@ -161,6 +175,7 @@ const LiquidGlassAdmin = () => {
                 </>
               )}
 
+              {/* Glass div preview */}
               <div
                 className="relative z-10 p-6 max-w-sm w-full text-center"
                 style={{
@@ -169,10 +184,16 @@ const LiquidGlassAdmin = () => {
                   WebkitBackdropFilter: config.enabled ? glassFilter : 'none',
                   background: previewDark
                     ? `rgba(255,255,255,${config.backgroundAlpha / 100})`
-                    : `rgba(255,255,255,${Math.min(config.backgroundAlpha / 100 + 0.2, 1)})`,
-                  boxShadow: config.enabled ? `0 0 ${config.softness}px rgba(255,255,255,${config.edgeSpecularity / 200}), inset 0 1px 0 rgba(255,255,255,${config.edgeSpecularity / 300})` : 'none',
+                    : `rgba(255,255,255,${Math.min((config.backgroundAlpha / 100) * 6, 0.65)})`,
+                  boxShadow: config.enabled
+                    ? previewDark
+                      ? `0 0 ${config.softness}px rgba(255,255,255,${config.edgeSpecularity / 200}), inset 0 1px 0 rgba(255,255,255,${config.edgeSpecularity / 300})`
+                      : `0 0 ${config.softness}px rgba(0,0,0,${config.edgeSpecularity / 600}), inset 0 1px 0 rgba(255,255,255,${config.edgeSpecularity / 150})`
+                    : 'none',
                   opacity: config.opacity / 100,
-                  border: `1px solid rgba(255,255,255,${previewDark ? 0.15 : 0.3})`,
+                  border: previewDark
+                    ? `1px solid rgba(255,255,255,${config.backgroundAlpha / 200})`
+                    : `1px solid rgba(0,0,0,${config.backgroundAlpha / 400})`,
                 }}
               >
                 <p className="text-base font-semibold" style={{ color: previewDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)' }}>
@@ -183,6 +204,7 @@ const LiquidGlassAdmin = () => {
                 </p>
               </div>
 
+              {/* Glass button preview */}
               <div className="relative z-10">
                 <LiquidGlassButton variant="primary">
                   Botão Liquid Glass
