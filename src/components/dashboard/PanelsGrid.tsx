@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -32,7 +32,23 @@ interface PanelsGridProps {
 
 const PanelsGrid: React.FC<PanelsGridProps> = ({ activePanels }) => {
   const { config: liquidGlassConfig } = useLiquidGlass();
-  const glassClass = liquidGlassConfig.enabled ? 'liquid-glass-container' : 'bg-card border border-border';
+  
+  // Build inline glass style matching the LiquidGlassAdmin preview model
+  const glassStyle = useMemo<React.CSSProperties>(() => {
+    if (!liquidGlassConfig.enabled) return {};
+    const filter = `blur(${liquidGlassConfig.strength + liquidGlassConfig.extraBlur}px) saturate(${liquidGlassConfig.tintSaturation}%) contrast(${liquidGlassConfig.contrast}%) brightness(${liquidGlassConfig.brightness}%) invert(${liquidGlassConfig.invert}%) hue-rotate(${liquidGlassConfig.tintHue}deg)`;
+    return {
+      borderRadius: `${liquidGlassConfig.cornerRadius}px`,
+      backdropFilter: filter,
+      WebkitBackdropFilter: filter,
+      background: `rgba(255,255,255,${liquidGlassConfig.backgroundAlpha / 100})`,
+      boxShadow: `0 0 ${liquidGlassConfig.softness}px rgba(255,255,255,${liquidGlassConfig.edgeSpecularity / 200}), inset 0 1px 0 rgba(255,255,255,${liquidGlassConfig.edgeSpecularity / 300})`,
+      opacity: liquidGlassConfig.opacity / 100,
+      border: `1px solid rgba(255,255,255,${liquidGlassConfig.backgroundAlpha / 200})`,
+    };
+  }, [liquidGlassConfig]);
+  
+  const glassClass = liquidGlassConfig.enabled ? '' : 'bg-card border border-border';
   const { modules } = useApiModules();
   const { 
     calculateDiscountedPrice, 
@@ -327,7 +343,7 @@ const PanelsGrid: React.FC<PanelsGridProps> = ({ activePanels }) => {
 
   if (activePanels.length === 0) {
     return (
-      <div className={`${glassClass} rounded-lg p-8`}>
+      <div className={`${glassClass} rounded-lg p-8`} style={glassStyle}>
         <EmptyState
           icon={Package}
           title="Nenhum painel ativo"
@@ -347,7 +363,7 @@ const PanelsGrid: React.FC<PanelsGridProps> = ({ activePanels }) => {
         const template = getPanelTemplate(panel.id);
         
         return (
-          <div key={panel.id} className={`${glassClass} rounded-lg`}>
+          <div key={panel.id} className={`${glassClass} rounded-lg`} style={glassStyle}>
             <CardHeader className="pb-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
