@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { useLiquidGlass, defaultLiquidGlassConfig, LiquidGlassConfig } from '@/contexts/LiquidGlassContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { RotateCcw, Droplets, Eye, Save, Sun, Moon, Palette } from 'lucide-react';
