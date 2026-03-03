@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from "sonner";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import ThemeSwitcher from './ThemeSwitcher';
+import { cn } from '@/lib/utils';
 import TextLogo from './TextLogo';
 import UserInfo from './UserInfo';
 import NotificationIcon from './notifications/NotificationIcon';
