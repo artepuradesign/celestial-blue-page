@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from "sonner";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import ThemeSwitcher from './ThemeSwitcher';
+import { cn } from '@/lib/utils';
 import TextLogo from './TextLogo';
 import UserInfo from './UserInfo';
 import NotificationIcon from './notifications/NotificationIcon';
@@ -143,16 +144,16 @@ const MenuSuperior = () => {
             {/* Menu links - always visible */}
             <nav className="hidden lg:flex items-center space-x-1">
               <Link to="/">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">Início</Button>
+                <Button variant="ghost" size="sm" className={cn("text-muted-foreground hover:text-foreground", liquidGlassConfig.enabled && "hover:bg-white/10")}>Início</Button>
               </Link>
               <Link to="/modulos">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">Módulos</Button>
+                <Button variant="ghost" size="sm" className={cn("text-muted-foreground hover:text-foreground", liquidGlassConfig.enabled && "hover:bg-white/10")}>Módulos</Button>
               </Link>
               <Link to="/planos-publicos">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">Planos</Button>
+                <Button variant="ghost" size="sm" className={cn("text-muted-foreground hover:text-foreground", liquidGlassConfig.enabled && "hover:bg-white/10")}>Planos</Button>
               </Link>
               <Link to="/dashboard">
-                <Button variant="ghost" size="sm" className="menu-paineis-link text-muted-foreground hover:text-foreground font-semibold">Painéis</Button>
+                <Button variant="ghost" size="sm" className={cn("menu-paineis-link text-muted-foreground hover:text-foreground font-semibold", liquidGlassConfig.enabled && "hover:bg-white/10")}>Painéis</Button>
               </Link>
             </nav>
 
