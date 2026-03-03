@@ -130,16 +130,17 @@ const LiquidGlassAdmin = () => {
                 <CardDescription>Visualize o efeito em tempo real</CardDescription>
               </div>
               <div className="flex items-center gap-2">
-                {/* Theme switcher (Padrão / Matrix) */}
-                <Button
-                  variant={isPreviewMatrix ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setPreviewTheme(isPreviewMatrix ? 'default' : 'matrix')}
-                  className="gap-2"
-                >
-                  <Palette className="h-3.5 w-3.5" />
-                  {isPreviewMatrix ? 'Matrix' : 'Padrão'}
-                </Button>
+                {/* Theme select */}
+                <Select value={previewTheme} onValueChange={(v) => setPreviewTheme(v as PreviewTheme)}>
+                  <SelectTrigger className="w-[130px] h-9">
+                    <Palette className="h-3.5 w-3.5 mr-1.5" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="default">Padrão</SelectItem>
+                    <SelectItem value="matrix">Matrix</SelectItem>
+                  </SelectContent>
+                </Select>
                 {/* Light/Dark toggle */}
                 <Button
                   variant="outline"
