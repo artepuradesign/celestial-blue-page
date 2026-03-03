@@ -186,16 +186,16 @@ const LiquidGlassAdmin = () => {
                   WebkitBackdropFilter: config.enabled ? glassFilter : 'none',
                   background: previewDark
                     ? `rgba(255,255,255,${config.backgroundAlpha / 100})`
-                    : `rgba(255,255,255,${Math.min((config.backgroundAlpha / 100) * 6, 0.65)})`,
+                    : `rgba(0,0,0,${config.backgroundAlpha / 100})`,
                   boxShadow: config.enabled
                     ? previewDark
                       ? `0 0 ${config.softness}px rgba(255,255,255,${config.edgeSpecularity / 200}), inset 0 1px 0 rgba(255,255,255,${config.edgeSpecularity / 300})`
-                      : `0 0 ${config.softness}px rgba(0,0,0,${config.edgeSpecularity / 600}), inset 0 1px 0 rgba(255,255,255,${config.edgeSpecularity / 150})`
+                      : `0 0 ${config.softness}px rgba(0,0,0,${config.edgeSpecularity / 200}), inset 0 1px 0 rgba(0,0,0,${config.edgeSpecularity / 300})`
                     : 'none',
                   opacity: config.opacity / 100,
                   border: previewDark
                     ? `1px solid rgba(255,255,255,${config.backgroundAlpha / 200})`
-                    : `1px solid rgba(0,0,0,${config.backgroundAlpha / 400})`,
+                    : `1px solid rgba(0,0,0,${config.backgroundAlpha / 200})`,
                 }}
               >
                 <p className="text-base font-semibold" style={{ color: previewDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)' }}>

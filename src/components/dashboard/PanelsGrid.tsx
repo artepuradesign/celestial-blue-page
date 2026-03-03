@@ -54,14 +54,14 @@ const PanelsGrid: React.FC<PanelsGridProps> = ({ activePanels }) => {
       WebkitBackdropFilter: filter,
       background: isDark
         ? `rgba(255,255,255,${bgAlpha})`
-        : `rgba(255,255,255,${Math.min(bgAlpha * 6, 0.65)})`,
+        : `rgba(0,0,0,${bgAlpha})`,
       boxShadow: isDark
         ? `0 0 ${liquidGlassConfig.softness}px rgba(255,255,255,${specHighAlpha}), inset 0 1px 0 rgba(255,255,255,${specLowAlpha})`
-        : `0 0 ${liquidGlassConfig.softness}px rgba(0,0,0,${specHighAlpha * 0.3}), inset 0 1px 0 rgba(255,255,255,${specLowAlpha * 2})`,
+        : `0 0 ${liquidGlassConfig.softness}px rgba(0,0,0,${specHighAlpha}), inset 0 1px 0 rgba(0,0,0,${specLowAlpha})`,
       opacity: liquidGlassConfig.opacity / 100,
       border: isDark
         ? `1px solid rgba(255,255,255,${borderAlpha})`
-        : `1px solid rgba(0,0,0,${borderAlpha * 0.5})`,
+        : `1px solid rgba(0,0,0,${borderAlpha})`,
     };
   }, [liquidGlassConfig, isDark]);
   
